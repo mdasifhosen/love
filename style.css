@@ -1,0 +1,39 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+h1 {
+    color: #ff4d6d;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 18px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#yes {
+    background-color: #38b000;
+    color: white;
+}
+
+#no {
+    background-color: #d00000;
+    color: white;
+    position: absolute;
+}
