@@ -1,20 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <title>Do You Love Me?</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<meta charset="UTF-8">
+<title>HAPPY BIRTHDAY  🎂</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="container">
-    <h1>Do you love me? ❤️</h1>
-    <div class="buttons">
-        <button id="yes">Yes 😍</button>
-        <button id="no">No 😅</button>
-    </div>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family: 'Poppins', sans-serif;}
+body{background:#000;height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;}
+.reel{width:100%;max-width:420px;height:100vh;background:linear-gradient(180deg,#000,#16001f,#000);color:#fff;position:relative;overflow:hidden}
+
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;opacity:0;transform:scale(1.1);transition:1.6s}
+.scene.active{opacity:1;transform:scale(1)}
+
+img{width:230px;height:230px;border-radius:50%;border:6px solid #ff4d6d;object-fit:cover;
+box-shadow:0 0 40px #ff4d6d;animation:pulse 3s infinite}
+@keyframes pulse{0%{box-shadow:0 0 20px #ff4d6d}50%{box-shadow:0 0 60px #ff4d6d}100%{box-shadow:0 0 20px #ff4d6d}}
+
+h1{font-size:40px;margin:18px;background:linear-gradient(90deg,#ff758c,#ffd6e0);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+p{font-size:20px;margin:10px 18px;color:#ffd6e0}
+
+.typing::after{content:"|";animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+
+button{margin-top:26px;padding:14px 36px;border:none;border-radius:40px;font-size:18px;
+background:linear-gradient(90deg,#ff4d6d,#ff758c);color:#fff;box-shadow:0 0 25px #ff4d6d}
+
+.heart{position:absolute;bottom:-20px;font-size:18px;color:#ff4d6d;animation:float 6s linear infinite}
+@keyframes float{to{transform:translateY(-110vh);opacity:0}}
+
+.confetti{position:absolute;width:8px;height:8px;top:-10px;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+</style>
+</head>
+
+<body>
+<div class="reel">
+<audio id="music" src="./1000195430.mp4"></audio>
+
+<!-- Scene 1 -->
+<div class="scene active">
+  <h1 class="typing" id="t1"></h1>
+  <p class="typing" id="s1"></p>
 </div>
 
-<script src="index .js"></script>
+<!-- Scene 2 -->
+<div class="scene">
+  <img src="./1000184661.jpg" alt="photo">
+  <p class="typing" id="s2"></p>
+</div>
+
+<!-- Scene 3 -->
+<div class="scene">
+  <h1 class="typing" id="t3"></h1>
+  <p class="typing" id="s3"></p>
+</div>
+
+<!-- Scene 4 -->
+<div class="scene">
+  <h1>🎂 HAPPY BIRTHDAY SUMAIYA 🎂</h1>
+  <p>আজকের দিনটা শুধু তোমার 💖</p>
+  <button onclick="finalBlast()">Feel the Magic ✨</button>
+</div>
+</div>
+
+<script>
+const scenes=document.querySelectorAll('.scene');
+
+// Bangla typing
+function typeText(elId, text, speed=70){
+  const el=document.getElementById(elId); let i=0;
+  const it=setInterval(()=>{ el.innerHTML+=text[i++]; if(i===text.length) clearInterval(it); }, speed);
+}
+
+// Scene 1 text
+typeText("t1","আজকের দিনটা সাধারণ না 🌙");
+typeText("s1","আজ আকাশটাও একটু বেশি সুন্দর ✨");
+
+// Scene switch
+setTimeout(()=>{
+  scenes[0].classList.remove('active');
+  scenes[1].classList.add('active');
+  typeText("s2","কারণ আজ একজন খুব স্পেশাল মানুষের জন্মদিন 💝");
+},4000);
+
+setTimeout(()=>{
+  scenes[1].classList.remove('active');
+  scenes[2].classList.add('active');
+  typeText("t3","হাসিটা কখনো হারিয়ে যেও না 😊");
+  typeText("s3","এই হাসিতেই পৃথিবীটা আলোকিত ✨");
+},8500);
+
+setTimeout(()=>{
+  scenes[2].classList.remove('active');
+  scenes[3].classList.add('active');
+},13000);
+
+// music (mobile friendly)
+document.body.addEventListener("click",()=>document.getElementById("music").play(),{once:true});
+
+// floating hearts
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='heart'; h.innerHTML='💖';
+  h.style.left=Math.random()*100+'%';
+  h.style.fontSize=(Math.random()*18+14)+'px';
+  document.querySelector('.reel').appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},500);
+
+// final confetti
+function finalBlast(){
+  for(let i=0;i<140;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'%';
+    c.style.background=['#ff4d6d','#ffd6e0','#fff','#ffb3c6'][Math.floor(Math.random()*4)];
+    c.style.animationDuration=(Math.random()*3+2)+'s';
+    document.querySelector('.reel').appendChild(c);
+  }
+  // alert("🎉 অনেক অনেক শুভ জন্মদিন! 💖");
+}
+</script>
 </body>
 </html>
